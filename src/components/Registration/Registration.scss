@@ -1,4 +1,8 @@
-.newPassword {
+.reg {
+  &__title {
+    text-align: center;
+  }
+  
   &__form {
     margin: 0 auto;
     width: 350px;

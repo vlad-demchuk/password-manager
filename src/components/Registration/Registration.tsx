@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import './Registration.scss';
 
 export const Registration: React.FC = () => {
   const [userLogin, setUserLogin] = useState('');
@@ -20,13 +21,15 @@ export const Registration: React.FC = () => {
   };
 
   return (
-    <div className="registration">
-      <h1>Registration</h1>
+    <div className="reg">
+      <h2 className="reg__title">Registration</h2>
 
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="login">
+      <form className="form reg__form" onSubmit={handleSubmit}>
+        <label className="form__label" htmlFor="login">
           Login
           <input
+            className="form__input"
+            id="login"
             type="text"
             name="login"
             value={userLogin}
@@ -36,9 +39,10 @@ export const Registration: React.FC = () => {
           />
         </label>
 
-        <label htmlFor="login">
+        <label className="form__label" htmlFor="login">
           Password
           <input
+            className="form__input"
             type="password"
             name="password"
             value={userPassword}
@@ -48,7 +52,7 @@ export const Registration: React.FC = () => {
           />
         </label>
 
-        <button type="submit">
+        <button className="button" type="submit">
           Submit
         </button>
 

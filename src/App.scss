@@ -1,1 +1,81 @@
-// some styles
+#root {
+  margin: 0 auto;
+  max-width: 1200px;
+
+  font-family: Roboto, sans-serif;
+  color: #000000bb;
+}
+
+.button {
+  height: 40px;
+
+  font-weight: 500;
+  font-size: 16px;
+
+  font-family: inherit;
+  color: #0000008d;
+
+  background-color: #fff;
+
+  border: 3px solid #8460bd;
+  border-radius: 8px;
+
+  transition: all 0.4s;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: #b35bf2;
+  }
+
+  &:active {
+    background-color: #afd067c0;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  &__label {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  &__input {
+    border: 2px solid #7843cd;
+    border-radius: 8px;
+    
+
+    
+    &:hover {
+      border-color: #390095;
+    }
+
+    &:focus {
+      outline: 2px solid rgba(78, 0, 187, 0.6);
+    }
+  }
+
+  &--editor {
+    height: 95px;
+
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+}
+
+.App {
+  margin: 0 auto;
+
+  &__buttons {
+    margin: 0 auto;
+
+    width: 300px;
+
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import './Authorization.scss';
 
 export const Authorization: React.FC = () => {
   const [userLogin, setUserLogin] = useState('');
@@ -30,17 +31,16 @@ export const Authorization: React.FC = () => {
     setWrongData(false);
   };
 
-  // eslint-disable-next-line no-console
-  console.log(validAuth);
-
   return (
-    <div className="registration">
-      <h1>Authorization</h1>
+    <div className="auth">
+      <h2 className="auth__title">Authorization</h2>
 
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="login">
+      <form className="form auth__form" onSubmit={handleSubmit}>
+        <label className="form__label" htmlFor="login">
           Login
           <input
+            className="form__input"
+            id="login"
             type="text"
             name="login"
             value={userLogin}
@@ -50,9 +50,11 @@ export const Authorization: React.FC = () => {
           />
         </label>
 
-        <label htmlFor="login">
+        <label className="form__label" htmlFor="login">
           Password
           <input
+            className="form__input"
+            id="password"
             type="password"
             name="password"
             value={userPassword}
@@ -62,7 +64,7 @@ export const Authorization: React.FC = () => {
           />
         </label>
 
-        <button type="submit">
+        <button className="button" type="submit">
           Submit
         </button>
       </form>

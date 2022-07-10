@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { EditPassword } from '../EditPassword/EditPassword';
 import { NewPassword } from '../NewPassword/NewPassword';
+import './PasswordManager.scss';
 
 type Props = {
   userLogin: string,
@@ -12,6 +13,7 @@ export const PasswordManager: React.FC<Props> = ({ userLogin }) => {
   const [userData, setUserData] = useState<User | null>(null);
 
   const [selectedPassword, setSelectedPassword] = useState(0);
+  const [revealedPassword, setRevealedPassword] = useState(0);
 
   const loadData = () => {
     const data = JSON.parse(localStorage.getItem(user) || '');
@@ -66,23 +68,41 @@ export const PasswordManager: React.FC<Props> = ({ userLogin }) => {
   };
 
   // eslint-disable-next-line no-console
-  console.log(userLogin, user, userData);
+  console.log(userLogin);
 
   return (
-    <div>
-      <Link to="/">Quit</Link>
+    <div className="manager">
+      <Link to="/">
+        <button className="button manager__quite" type="button">
+          Quit
+        </button>
+      </Link>
       <NewPassword addNewPassword={addNewPassword} />
-      <div>
+      <div className="manager__passwords">
         Passwords
-        <ul>
+        <ol className="manager__list">
           {userData?.savedPasswords.map((password: Password) => (
             <React.Fragment key={password.id}>
-              <li>
+              <li className="manager__list-item">
                 <p>{`App name: ${password.nameOfApp}`}</p>
                 <p>{`Login: ${password.userLogin}`}</p>
-                <p>{`Password: ${password.userPassword}`}</p>
+                <p>
+                  {revealedPassword === password.id
+                    ? (`Password: ${password.userPassword}`)
+                    : 'Password: ******'}
+                </p>
+                {password.id === selectedPassword && (
+                  <div className="manager__editor">
+                    <EditPassword
+                      editPassword={editPassword}
+                      password={password}
+                    />
+                  </div>
+                )}
               </li>
+
               <button
+                className="button manager__button"
                 type="button"
                 onClick={() => {
                   if (selectedPassword !== password.id) {
@@ -94,23 +114,29 @@ export const PasswordManager: React.FC<Props> = ({ userLogin }) => {
               >
                 Edit
               </button>
-              {password.id === selectedPassword && (
-                <EditPassword
-                  editPassword={editPassword}
-                  password={password}
-                />
-              )}
+
               <button
+                className="button manager__button"
+                type="button"
+                onClick={() => {
+                  setRevealedPassword(password.id);
+                }}
+              >
+                Show password
+              </button>
+
+              <button
+                className="button manager__button"
                 type="button"
                 onClick={() => {
                   deletePassword(password.id);
                 }}
               >
-                X
+                Delete password
               </button>
             </React.Fragment>
           ))}
-        </ul>
+        </ol>
 
       </div>
     </div>
