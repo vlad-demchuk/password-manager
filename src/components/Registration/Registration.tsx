@@ -8,8 +8,9 @@ export const Registration: React.FC = () => {
 
   const [userLogin, setUserLogin] = useState('');
   const [userPassword, setUserPassword] = useState('');
-  const [wrongData, setWrongData] = useState(false);
   const [registered, setRegistered] = useState(false);
+  const [wrongData, setWrongData] = useState(false);
+  const [userExist, setUserExist] = useState(false);
 
   const handleSubmit = (event: React.FormEvent): void => {
     event.preventDefault();
@@ -17,6 +18,14 @@ export const Registration: React.FC = () => {
     if (userLogin.length < 6
       || userPassword.length < 6) {
       setWrongData(true);
+
+      return;
+    }
+
+    const checkUser = localStorage.getItem(userLogin);
+
+    if (checkUser !== null) {
+      setUserExist(true);
 
       return;
     }
@@ -46,6 +55,8 @@ export const Registration: React.FC = () => {
             value={userLogin}
             onChange={(event) => {
               setUserLogin(event.target.value);
+              setWrongData(false);
+              setUserExist(false);
             }}
           />
         </label>
@@ -59,9 +70,15 @@ export const Registration: React.FC = () => {
             value={userPassword}
             onChange={(event) => {
               setUserPassword(event.target.value);
+              setWrongData(false);
+              setUserExist(false);
             }}
           />
         </label>
+
+        {userExist && (
+          <p className="form__message-error">User with that name already exists!</p>
+        )}
 
         {wrongData && (
           <p className="form__message-error">Login and password lenght must be more than 6!</p>
