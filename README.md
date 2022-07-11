@@ -24,4 +24,4 @@ Application has been created to manage your passwords. You can create an account
 ## Troubleshooting
 
 All data is stored locally(using local storage)!
-For any contribution or problem solving you could find me [https://t.me/Vlad_Demchuk](Telegram) and [https://www.linkedin.com/in/vlad-demchuk-b3071523b/](LinkedIn).
+For any contribution or problem solving you could find me [Telegram](https://t.me/Vlad_Demchuk) and [LinkedIn](https://www.linkedin.com/in/vlad-demchuk-b3071523b/).
