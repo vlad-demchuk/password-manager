@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './Authorization.scss';
 
 export const Authorization: React.FC = () => {
+  const navigate = useNavigate();
+
   const [userLogin, setUserLogin] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [wrongData, setWrongData] = useState(false);
@@ -68,9 +70,11 @@ export const Authorization: React.FC = () => {
           Submit
         </button>
       </form>
+
       {wrongData && 'Something was wrong'}
+
       {validAuth && (
-        <Navigate to="/passwordManager" replace />
+        navigate('/passwordManager', { replace: true, state: { nameFromLocation: userLogin } })
       )}
     </div>
   );

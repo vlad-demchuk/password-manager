@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { EditPassword } from '../EditPassword/EditPassword';
 import { NewPassword } from '../NewPassword/NewPassword';
 import './PasswordManager.scss';
 
-type Props = {
-  userLogin: string,
-};
+interface LocationState {
+  nameFromLocation: string,
+}
 
-export const PasswordManager: React.FC<Props> = ({ userLogin }) => {
-  const [user] = useState('vlad');
+export const PasswordManager: React.FC = () => {
+  const location = useLocation();
+  const { nameFromLocation } = location.state as LocationState;
+
+  const [user] = useState(nameFromLocation);
   const [userData, setUserData] = useState<User | null>(null);
 
   const [selectedPassword, setSelectedPassword] = useState(0);
@@ -66,9 +69,6 @@ export const PasswordManager: React.FC<Props> = ({ userLogin }) => {
       loadData();
     }
   };
-
-  // eslint-disable-next-line no-console
-  console.log(userLogin);
 
   return (
     <div className="manager">

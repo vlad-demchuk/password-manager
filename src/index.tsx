@@ -16,7 +16,8 @@ ReactDOM.render(
         <Route path="/" element={<App />} />
         <Route path="/authorization" element={<Authorization />} />
         <Route path="/registration" element={<Registration />} />
-        <Route path="/passwordManager" element={<PasswordManager userLogin="" />} />
+        <Route path="/passwordManager" element={<PasswordManager />} />
+        <Route path="*" element={<h2>Page not found</h2>} />
       </Routes>
     </HashRouter>
   </React.StrictMode>,

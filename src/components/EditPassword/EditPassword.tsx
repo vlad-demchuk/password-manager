@@ -64,7 +64,7 @@ export const EditPassword: React.FC<Props> = ({ editPassword, password }) => {
         </label>
 
         <button className="button" type="submit">
-          Edit
+          Save
         </button>
       </form>
     </div>

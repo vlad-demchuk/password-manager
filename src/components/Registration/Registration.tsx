@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './Registration.scss';
 
 export const Registration: React.FC = () => {
+  const navigate = useNavigate();
   const [userLogin, setUserLogin] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [registered, setRegistered] = useState(false);
@@ -58,7 +59,7 @@ export const Registration: React.FC = () => {
 
       </form>
       {registered && (
-        <Navigate to="/passwordManager" replace />
+        navigate('/passwordManager', { replace: true, state: { nameFromLocation: userLogin } })
       )}
 
     </div>

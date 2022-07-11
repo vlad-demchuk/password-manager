@@ -32,7 +32,7 @@ export const NewPassword: React.FC<Props> = ({ addNewPassword }) => {
         }}
       >
         <label className="form__label" htmlFor="nameOfApp">
-          App name
+          Website
           <input
             className="form__input"
             id="nameOfApp"
@@ -74,7 +74,7 @@ export const NewPassword: React.FC<Props> = ({ addNewPassword }) => {
         </label>
 
         <button className="button" type="submit">
-          Add
+          Add new password
         </button>
       </form>
     </div>
