@@ -4,15 +4,11 @@ import { EditPassword } from '../EditPassword/EditPassword';
 import { NewPassword } from '../NewPassword/NewPassword';
 import './PasswordManager.scss';
 
-interface LocationState {
-  nameFromLocation: string,
-}
-
 export const PasswordManager: React.FC = () => {
   const location = useLocation();
   const { nameFromLocation } = location.state as LocationState;
 
-  const [user] = useState(nameFromLocation);
+  const [user, setUser] = useState(nameFromLocation);
   const [userData, setUserData] = useState<User | null>(null);
 
   const [selectedPassword, setSelectedPassword] = useState(0);
@@ -25,6 +21,7 @@ export const PasswordManager: React.FC = () => {
   };
 
   useEffect(() => {
+    setUser(nameFromLocation);
     loadData();
   }, []);
 
@@ -77,66 +74,73 @@ export const PasswordManager: React.FC = () => {
           Quit
         </button>
       </Link>
+
       <NewPassword addNewPassword={addNewPassword} />
+
       <div className="manager__passwords">
         Passwords
-        <ol className="manager__list">
-          {userData?.savedPasswords.map((password: Password) => (
-            <React.Fragment key={password.id}>
-              <li className="manager__list-item">
-                <p>{`App name: ${password.nameOfApp}`}</p>
-                <p>{`Login: ${password.userLogin}`}</p>
-                <p>
-                  {revealedPassword === password.id
-                    ? (`Password: ${password.userPassword}`)
-                    : 'Password: ******'}
-                </p>
-                {password.id === selectedPassword && (
-                  <div className="manager__editor">
-                    <EditPassword
-                      editPassword={editPassword}
-                      password={password}
-                    />
-                  </div>
-                )}
-              </li>
+        {!userData?.savedPasswords.length
+          ? (
+            <p>Add passwords using the form above!</p>
+          ) : (
+            <ol className="manager__list">
+              {userData?.savedPasswords.map((password: Password) => (
+                <React.Fragment key={password.id}>
+                  <li className="manager__list-item">
+                    <p>{`Website: ${password.nameOfApp}`}</p>
+                    <p>{`Login: ${password.userLogin}`}</p>
+                    <p>
+                      {revealedPassword === password.id
+                        ? (`Password: ${password.userPassword}`)
+                        : 'Password: ******'}
+                    </p>
+                    {password.id === selectedPassword && (
+                      <div className="manager__editor">
+                        <EditPassword
+                          editPassword={editPassword}
+                          password={password}
+                        />
+                      </div>
+                    )}
+                  </li>
 
-              <button
-                className="button manager__button"
-                type="button"
-                onClick={() => {
-                  if (selectedPassword !== password.id) {
-                    setSelectedPassword(password.id);
-                  } else {
-                    setSelectedPassword(0);
-                  }
-                }}
-              >
-                Edit
-              </button>
+                  <button
+                    className="button manager__button"
+                    type="button"
+                    onClick={() => {
+                      if (selectedPassword !== password.id) {
+                        setSelectedPassword(password.id);
+                      } else {
+                        setSelectedPassword(0);
+                      }
+                    }}
+                  >
+                    Edit
+                  </button>
 
-              <button
-                className="button manager__button"
-                type="button"
-                onClick={() => {
-                  setRevealedPassword(password.id);
-                }}
-              >
-                Show password
-              </button>
+                  <button
+                    className="button manager__button"
+                    type="button"
+                    onClick={() => {
+                      setRevealedPassword(password.id);
+                    }}
+                  >
+                    Show password
+                  </button>
 
-              <button
-                className="button manager__button"
-                type="button"
-                onClick={() => {
-                  deletePassword(password.id);
-                }}
-              >
-                Delete password
-              </button>
-            </React.Fragment>
-          ))}
-        </ol>
+                  <button
+                    className="button manager__button"
+                    type="button"
+                    onClick={() => {
+                      deletePassword(password.id);
+                    }}
+                  >
+                    Delete password
+                  </button>
+                </React.Fragment>
+              ))}
+            </ol>
+          )}
 
       </div>
     </div>

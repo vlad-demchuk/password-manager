@@ -5,7 +5,7 @@ Software application designed to store and manage online credentials.
 
 ## Description
 
-Application has been created to manage your passwords. You can create an account щк enter an existing one. All data is stored in local storage.
+Application has been created to manage your passwords. You can create an account or enter an existing one. All data is stored in local storage.
 
 ### Dependencies
 * Node v14.18.2
@@ -14,6 +14,7 @@ Application has been created to manage your passwords. You can create an account
 * React router dom v6.3.0
 * Typescript v4.2.4
 * SCSS
+* ClassNames
 
 ### Installing
 * Fork and clone this repository

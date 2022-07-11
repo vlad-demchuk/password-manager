@@ -38,16 +38,19 @@
   flex-direction: column;
   gap: 8px;
 
+  position: relative;
+
   &__label {
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
   
   &__input {
+    height: 25px;
+
     border: 2px solid #7843cd;
     border-radius: 8px;
-    
-
     
     &:hover {
       border-color: #390095;
@@ -56,13 +59,41 @@
     &:focus {
       outline: 2px solid rgba(78, 0, 187, 0.6);
     }
+
+    &--error {
+      border-color: #ff0000;
+
+      &:hover {
+        border-color: #ff0000;
+      }
+
+      &:focus {
+        outline: 2px solid #ff0000;
+      }
+    }
   }
 
-  &--editor {
-    height: 95px;
+  &__message-error {
+    position: absolute;
+    top: 63px;
 
+    font-weight: bold;
+    color: #ff0000;
+  }
+
+  &__message--success {
+    position: absolute;
+    top: 103px;
+
+    font-weight: bold;
+    color: #0db40d;
+  }
+  
+  &--editor {
+    height: 150px;
+    margin-top: 9px;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 20px;
   }
 }
 

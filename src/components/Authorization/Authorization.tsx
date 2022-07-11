@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Authorization.scss';
+import classNames from 'classnames';
 
 export const Authorization: React.FC = () => {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ export const Authorization: React.FC = () => {
   const [wrongData, setWrongData] = useState(false);
   const [validAuth, setValidAuth] = useState(false);
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = (event: React.FormEvent): void => {
     event.preventDefault();
 
     const userData = localStorage.getItem(userLogin);
@@ -30,24 +31,24 @@ export const Authorization: React.FC = () => {
     }
 
     setValidAuth(true);
-    setWrongData(false);
   };
 
   return (
     <div className="auth">
-      <h2 className="auth__title">Authorization</h2>
+      <h2 className="auth__title">Log In</h2>
 
       <form className="form auth__form" onSubmit={handleSubmit}>
         <label className="form__label" htmlFor="login">
           Login
           <input
-            className="form__input"
+            className={classNames('form__input', { 'form__input--error': wrongData })}
             id="login"
             type="text"
             name="login"
             value={userLogin}
             onChange={(event) => {
               setUserLogin(event.target.value);
+              setWrongData(false);
             }}
           />
         </label>
@@ -55,23 +56,26 @@ export const Authorization: React.FC = () => {
         <label className="form__label" htmlFor="login">
           Password
           <input
-            className="form__input"
+            className={classNames('form__input', { 'form__input--error': wrongData })}
             id="password"
             type="password"
             name="password"
             value={userPassword}
             onChange={(event) => {
               setUserPassword(event.target.value);
+              setWrongData(false);
             }}
           />
         </label>
 
-        <button className="button" type="submit">
+        {wrongData && (
+          <p className="form__message-error">Invalid username or password!</p>
+        )}
+
+        <button className="button auth__button" type="submit">
           Submit
         </button>
       </form>
-
-      {wrongData && 'Something was wrong'}
 
       {validAuth && (
         navigate('/passwordManager', { replace: true, state: { nameFromLocation: userLogin } })

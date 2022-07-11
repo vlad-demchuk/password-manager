@@ -10,6 +10,8 @@ export const NewPassword: React.FC<Props> = ({ addNewPassword }) => {
   const [userLogin, setUserLogin] = useState('');
   const [userPassword, setUserPassword] = useState('');
 
+  const [added, setAdded] = useState(false);
+
   return (
     <div className="newPassword">
       <form
@@ -26,6 +28,7 @@ export const NewPassword: React.FC<Props> = ({ addNewPassword }) => {
 
           addNewPassword(data);
 
+          setAdded(true);
           setNameOfApp('');
           setUserLogin('');
           setUserPassword('');
@@ -41,6 +44,7 @@ export const NewPassword: React.FC<Props> = ({ addNewPassword }) => {
             value={nameOfApp}
             onChange={(event) => {
               setNameOfApp(event.target.value);
+              setAdded(false);
             }}
           />
         </label>
@@ -55,6 +59,7 @@ export const NewPassword: React.FC<Props> = ({ addNewPassword }) => {
             value={userLogin}
             onChange={(event) => {
               setUserLogin(event.target.value);
+              setAdded(false);
             }}
           />
         </label>
@@ -69,11 +74,16 @@ export const NewPassword: React.FC<Props> = ({ addNewPassword }) => {
             value={userPassword}
             onChange={(event) => {
               setUserPassword(event.target.value);
+              setAdded(false);
             }}
           />
         </label>
 
-        <button className="button" type="submit">
+        {added && (
+          <p className="form__message--success">Password has been added!</p>
+        )}
+
+        <button className="button newPassword__button" type="submit">
           Add new password
         </button>
       </form>

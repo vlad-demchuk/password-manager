@@ -11,3 +11,7 @@ interface Password {
   userLogin: string,
   userPassword: string,
 }
+
+interface LocationState {
+  nameFromLocation: string,
+}
