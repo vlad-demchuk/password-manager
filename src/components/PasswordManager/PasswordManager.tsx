@@ -85,7 +85,7 @@ export const PasswordManager: React.FC = () => {
           ) : (
             <ol className="manager__list">
               {userData?.savedPasswords.map((password: Password) => (
-                <React.Fragment key={password.id}>
+                <div className="manager__list-block" key={password.id}>
                   <li className="manager__list-item">
                     <p>{`Website: ${password.nameOfApp}`}</p>
                     <p>{`Login: ${password.userLogin}`}</p>
@@ -137,7 +137,7 @@ export const PasswordManager: React.FC = () => {
                   >
                     Delete password
                   </button>
-                </React.Fragment>
+                </div>
               ))}
             </ol>
           )}

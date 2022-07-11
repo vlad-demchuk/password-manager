@@ -1,0 +1,15 @@
+.navigate {
+  margin: 0 auto;
+  display: flex;
+  
+
+  &__buttons {
+    margin: 0 auto;
+
+    width: 300px;
+
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+}

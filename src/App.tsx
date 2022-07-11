@@ -1,18 +1,23 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './App.scss';
+import { Authorization } from './components/Authorization/Authorization';
+import { Header } from './components/Header/Header';
+import { Navigation } from './components/Navigation';
+import { PasswordManager } from './components/PasswordManager/PasswordManager';
+import { Registration } from './components/Registration/Registration';
 
 export const App: React.FC = () => {
   return (
     <div className="App">
-      <div className="App__buttons">
-        <Link to="/authorization">
-          <button className="button" type="button">Log in</button>
-        </Link>
-        <Link to="/registration">
-          <button className="button" type="button">Create new account</button>
-        </Link>
-      </div>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Navigation />} />
+        <Route path="/authorization" element={<Authorization />} />
+        <Route path="/registration" element={<Registration />} />
+        <Route path="/passwordManager" element={<PasswordManager />} />
+        <Route path="*" element={<h2>Page not found</h2>} />
+      </Routes>
     </div>
   );
 };
